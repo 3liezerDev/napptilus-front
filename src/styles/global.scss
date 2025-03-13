@@ -1,0 +1,17 @@
+@use "variables" as vars; // Importa _variables.scss con alias "vars"
+@use "mixins"; // Importa _mixins.scss sin alias (por defecto "mixins")
+
+body {
+  font-family: vars.$font-stack;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  // Uso de la variable
+  color: vars.$primary-color;
+
+  // Uso del mixin
+  @include mixins.big-title;
+}
