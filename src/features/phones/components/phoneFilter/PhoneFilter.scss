@@ -1,0 +1,25 @@
+.phone-filter {
+    background-color: white;
+    padding: 24px 100px;
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  
+    .search-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid gray;
+      font-size: 16px;
+      outline: none;
+    }
+  
+    .results-count {
+      font-size: 14px;
+      font-weight: bold;
+      color: black;
+      width: 100%;
+    }
+  }
+  

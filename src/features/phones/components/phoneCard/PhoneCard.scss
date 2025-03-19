@@ -1,0 +1,71 @@
+.phone-card {
+    width: 100%; /* Se ajusta al grid */
+    max-width: 240px;
+    height: auto;
+    border: 0.5px solid #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Estilos del header */
+  .phone-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    overflow: hidden; /* Evita que la imagen se expanda demasiado */
+  }
+
+  .phone-card__image-wrapper {
+    width: 220px; /* Ajusta el tamaño que necesites */
+    height: 220px; /* ✅ Fijamos la altura */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* ✅ Evita que imágenes más grandes sobresalgan */
+  }
+  
+  /* Imágenes ajustadas sin deformarse */
+  .phone-card__image {
+    max-height: 200px ;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ✅ Asegura que no se corten y se ajusten */
+  }
+  
+  /* Estilos del main */
+  .phone-card__main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    gap: 8px;
+  }
+  
+  .phone-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .phone-card__brand {
+    font-size: 12px;
+    font-weight: 300;
+    color: black;
+  }
+  
+  .phone-card__name {
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+  }
+  
+  .phone-card__price {
+    font-size: 12px;
+    font-weight: 300;
+    color: black;
+    text-align: right;
+  }
+  
