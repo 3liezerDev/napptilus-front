@@ -1,25 +1,19 @@
-import { useState } from 'react';
-import './PhoneFilter.scss';
+import { usePhoneFilter } from "../../hooks/usePhoneFilter"; // ✅ Usamos el hook
+import "./PhoneFilter.scss";
 
 export const PhoneFilter = ({ onSearch, totalResults }) => {
-  const [query, setQuery] = useState('');
-
-  const handleSearch = (e) => {
-    const value = e.target.value;
-    setQuery(value);
-    onSearch(value);
-  };
+  const { query, setQuery } = usePhoneFilter(onSearch); // ✅ Extraemos lógica
 
   return (
-    <div className="phone-filter">
+    <form className="phone-filter">
       <input
         type="text"
         placeholder="Search for a smartphone..."
         value={query}
-        onChange={handleSearch}
+        onChange={(e) => setQuery(e.target.value)} // ✅ Controlado + debounce
         className="search-input"
       />
       <span className="results-count">{totalResults} RESULTS</span>
-    </div>
+    </form>
   );
 };

@@ -1,0 +1,20 @@
+import { useState, useEffect } from "react";
+import { useDebounce } from "./useDebounce"; // ✅ Importamos debounce
+import { getPhones } from "../services/phonesApi"; // ✅ Importamos la API
+
+export const usePhoneFilter = (onSearch) => {
+  const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 650); // ⏳ Espera 650ms antes de ejecutar la búsqueda
+
+  useEffect(() => {
+    const fetchPhones = async () => {
+      if (debouncedQuery.length >= 3) {
+        onSearch(debouncedQuery); // 🔍 Busca si hay 3+ caracteres
+      } 
+    };
+
+    fetchPhones();
+  }, [debouncedQuery, onSearch]);
+
+  return { query, setQuery };
+};

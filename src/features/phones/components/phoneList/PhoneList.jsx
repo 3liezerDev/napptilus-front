@@ -1,21 +1,22 @@
-import { usePhones } from "../../hooks/usePhones";
+import { useMemo } from "react";
 import { PhoneCard } from "../phoneCard/PhoneCard";
-import { PHONE_FIELDS } from "../../../phones/constants/apiFields"; // 🔹 Importamos los campos
+import { PHONE_FIELDS } from "../../constants/apiFields";
 import "./PhoneList.scss";
 
-const PhoneList = () => {
-  const { phones, loading } = usePhones();
+const PhoneList = ({ phones, loading }) => {
+  // ✅ Memoriza los resultados filtrados para evitar cálculos en cada render
+  const memorizedPhones = useMemo(() => phones, [phones]);
 
   return (
     <div className="phone-list">
       {loading ? (
-        <p>Cargando teléfonos...</p>
-      ) : phones.length > 0 ? (
-        phones.map((phone) => (
-          <PhoneCard key={phone[PHONE_FIELDS.ID]} phone={phone} /> // 🔹 Usamos apiFields.ID
+        <p>Loading phones...</p>
+      ) : memorizedPhones.length > 0 ? (
+        memorizedPhones.map((phone) => (
+          <PhoneCard key={phone[PHONE_FIELDS.ID]} phone={phone} />
         ))
       ) : (
-        <p>No hay teléfonos disponibles.</p>
+        <p>No phones found.</p>
       )}
     </div>
   );
