@@ -1,71 +1,105 @@
 .phone-card {
-    width: 100%; /* Se ajusta al grid */
-    max-width: 240px;
-    height: auto;
-    border: 0.5px solid #000;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  /* Estilos del header */
-  .phone-card__header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  border: 0.5px solid #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    overflow: hidden; /* Evita que la imagen se expanda demasiado */
+    height: 0%;
+    background-color: black;
+    z-index: 0;
+    transition: height 0.7s cubic-bezier(0.15, 1, 0.5, 1);
   }
 
-  .phone-card__image-wrapper {
-    width: 220px; /* Ajusta el tamaño que necesites */
-    height: 220px; /* ✅ Fijamos la altura */
+  &:hover::before {
+    height: 100%;
+  }
+
+  &__header,
+  &__main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+  }
+
+  &__header {
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    overflow: hidden;
+  }
+
+  &__main {
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  &__image-wrapper {
+    width: 220px;
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* ✅ Evita que imágenes más grandes sobresalgan */
+    overflow: hidden;
   }
-  
-  /* Imágenes ajustadas sin deformarse */
-  .phone-card__image {
-    max-height: 200px ;
+
+  &__image {
+    max-height: 200px;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* ✅ Asegura que no se corten y se ajusten */
+    object-fit: contain;
   }
-  
-  /* Estilos del main */
-  .phone-card__main {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    width: 100%;
-    gap: 8px;
-  }
-  
-  .phone-card__info {
+
+  &__info {
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
-  
-  .phone-card__brand {
+
+  &__brand,
+  &__name,
+  &__price {
+    position: relative;
+    z-index: 1;
+    color: black;
+    transition: color 0.4s ease 0.15s;
+  }
+
+  &__brand {
     font-size: 12px;
     font-weight: 300;
-    color: black;
   }
-  
-  .phone-card__name {
+
+  &__name {
     font-size: 14px;
     font-weight: 500;
-    color: black;
   }
-  
-  .phone-card__price {
+
+  &__price {
     font-size: 12px;
     font-weight: 300;
-    color: black;
     text-align: right;
   }
-  
+
+  &:hover {
+    .phone-card__brand,
+    .phone-card__name,
+    .phone-card__price {
+      color: white;
+      transition: color 0.18s ease 0.10s;
+    }
+  }
+}

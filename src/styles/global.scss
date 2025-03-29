@@ -7,10 +7,4 @@ body {
   padding: 0;
 }
 
-h1 {
-  // Uso de la variable
-  color: vars.$primary-color;
 
-  // Uso del mixin
-  @include mixins.big-title;
-}
