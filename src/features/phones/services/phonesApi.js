@@ -33,3 +33,13 @@ export const searchPhones = async (query) => {
     return [];
   }
 };
+
+export const getPhoneById = async (id) => {
+  try {
+    const response = await axios.get(`/products/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error al obtener el teléfono por ID:", error);
+    throw error;
+  }
+};

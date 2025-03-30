@@ -2,16 +2,22 @@
   position: relative;
   width: 100%;
   max-width: 240px;
-  height: auto;
+  height: 100%;
   border: 0.5px solid #000;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: white;
   overflow: hidden;
+  transition:
+    transform 0.5s cubic-bezier(0.15, 1, 0.5, 1),
+    box-shadow 0.5s ease;
 
-  &::before {
-    content: "";
+  &:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  &__overlay {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -19,11 +25,7 @@
     height: 0%;
     background-color: black;
     z-index: 0;
-    transition: height 0.7s cubic-bezier(0.15, 1, 0.5, 1);
-  }
-
-  &:hover::before {
-    height: 100%;
+    pointer-events: none;
   }
 
   &__header,
@@ -61,6 +63,7 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+    transition: transform 0.5s cubic-bezier(0.15, 1, 0.5, 1);
   }
 
   &__info {
@@ -76,6 +79,7 @@
     z-index: 1;
     color: black;
     transition: color 0.4s ease 0.15s;
+    // Estas propiedades pueden ser animadas por Framer
   }
 
   &__brand {
@@ -93,13 +97,10 @@
     font-weight: 300;
     text-align: right;
   }
+}
 
-  &:hover {
-    .phone-card__brand,
-    .phone-card__name,
-    .phone-card__price {
-      color: white;
-      transition: color 0.18s ease 0.10s;
-    }
-  }
+.phone-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
