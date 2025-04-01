@@ -2,6 +2,14 @@ import { useState, useCallback } from "react";
 import { PhoneFilter } from "../components/phoneFilter/PhoneFilter";
 import PhoneList from "../components/phoneList/PhoneList";
 import { usePhones } from "../hooks/usePhones";
+import { motion } from "framer-motion";
+
+const pageTransition = {
+  type: "spring",
+  mass: 1,
+  stiffness: 80,
+  damping: 20,
+};
 
 const PhonesPage = () => {
   const [searchQuery, setSearchQuery] = useState(""); // ✅ Estado del input de búsqueda
@@ -13,10 +21,16 @@ const PhonesPage = () => {
   }, []);
 
   return (
-    <div>
+    <motion.div
+    className="phones-grid-page"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={pageTransition}
+  >
       <PhoneFilter onSearch={handleSearch} totalResults={phones.length} />
       <PhoneList phones={phones} loading={loading} />
-    </div>
+    </motion.div>
   );
 };
 
