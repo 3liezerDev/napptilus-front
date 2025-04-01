@@ -1,39 +1,41 @@
-import { useEffect, useState } from "react";
-import { getPhones, searchPhones } from "../services/phonesApi"; // ✅ Importamos ambas funciones
-import { PHONE_FIELDS } from "../constants/apiFields";
-import { useDebounce } from "../hooks/useDebounce"; // ✅ Implementamos debounce
+import { useQuery } from "@tanstack/react-query";
+import { getPhones } from "../services/phonesApi";
+import { useDebounce } from "./useDebounce";
+import { useMemo } from "react";
 
-export const usePhones = (searchQuery) => {  // ✅ Ahora recibe `searchQuery`
-  const [phones, setPhones] = useState([]);
-  const [loading, setLoading] = useState(true);
-  
-  const debouncedQuery = useDebounce(searchQuery, 300); // ✅ Evita múltiples llamadas a la API
+export const usePhones = (searchQuery) => {
+  const debouncedQuery = useDebounce(searchQuery, 300);
 
-  useEffect(() => {
-    const fetchPhones = async () => {
-      setLoading(true);
-      const data = debouncedQuery ? await searchPhones(debouncedQuery) : await getPhones();
-      
-      if (!Array.isArray(data)) {
-        console.error("❌ Error: los datos recibidos no son un array.");
-        setPhones([]);
-      } else {
-        setPhones(
-          data.map((phone) => ({
-            id: phone[PHONE_FIELDS.ID],
-            brand: phone[PHONE_FIELDS.BRAND],
-            name: phone[PHONE_FIELDS.NAME],
-            basePrice: phone[PHONE_FIELDS.BASE_PRICE],
-            imageUrl: phone[PHONE_FIELDS.IMAGE_URL],
-          }))
-        );
-      }
+  const {
+    data: phones = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["phones"],
+    queryFn: getPhones,
+    staleTime: 1000 * 60 * 5, // 5 minutos
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
+    retry: 2,
+  });
 
-      setLoading(false);
-    };
+  const filteredPhones = useMemo(() => {
+    const q = debouncedQuery.trim().toLowerCase();
 
-    fetchPhones();
-  }, [debouncedQuery]); // ✅ Llamamos la API solo cuando `searchQuery` cambia
+    if (!q || q.length < 3) return phones;
 
-  return { phones, loading };
+    return phones.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.brand.toLowerCase().includes(q)
+    );
+  }, [debouncedQuery, phones]);
+
+  return {
+    phones: filteredPhones,
+    isLoading,
+    isError,
+    refetch,
+  };
 };
