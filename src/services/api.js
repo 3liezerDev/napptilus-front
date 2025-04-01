@@ -1,12 +1,20 @@
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL, // 🔹 Ahora usa la variable de entorno
-  timeout: 5000, // 🔹 Tiempo máximo de espera (5s)
+  baseURL: import.meta.env.VITE_BASE_URL,
+  timeout: 7000,
   headers: {
     "Content-Type": "application/json",
-    "x-api-key": import.meta.env.VITE_API_KEY, // 🔹 Se añade la API key a cada petición
+    "x-api-key": import.meta.env.VITE_API_KEY,
   },
+});
+
+axiosRetry(api, {
+  retries: 3,
+  retryDelay: (retryCount) => retryCount * 1000,
+  retryCondition: (error) =>
+    axiosRetry.isNetworkError(error) || axiosRetry.isRetryableError(error),
 });
 
 export default api;

@@ -22,17 +22,6 @@ export const getPhones = async () => {
   }
 };
 
-// 🔹 Buscar teléfonos por nombre o marca (sin duplicados)
-export const searchPhones = async (query) => {
-  try {
-    const response = await axios.get("/products", { params: { search: query } });
-    const uniquePhones = removeDuplicates(response.data).slice(0, 20); // 🔹 Tomamos los primeros 20 sin duplicados
-    return uniquePhones;
-  } catch (error) {
-    console.error("❌ Error en la búsqueda de teléfonos:", error);
-    return [];
-  }
-};
 
 export const getPhoneById = async (id) => {
   try {
