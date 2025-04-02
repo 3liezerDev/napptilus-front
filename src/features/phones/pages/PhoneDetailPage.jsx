@@ -1,10 +1,8 @@
-// PhoneDetailPage.jsx
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPhoneById } from "../services/phonesApi";
+import { usePhoneById } from "../../phones/hooks/usePhonById";
+import { motion } from "framer-motion";
 import PhoneDetail from "../components/phoneDetail/PhoneDetail";
 import { BackButton } from "../../../components/BackButton/BackButton";
-import { motion } from "framer-motion";
 
 const pageTransition = {
   type: "spring",
@@ -15,24 +13,7 @@ const pageTransition = {
 
 const PhoneDetailPage = () => {
   const { id } = useParams();
-  const [phone, setPhone] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchPhone = async () => {
-      try {
-        const data = await getPhoneById(id);
-        setPhone(data);
-      } catch (err) {
-        setError("No se pudo cargar el producto.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPhone();
-  }, [id]);
+  const { data: phone, isLoading, isError } = usePhoneById(id);
 
   return (
     <motion.div
@@ -43,9 +24,9 @@ const PhoneDetailPage = () => {
       transition={pageTransition}
     >
       <BackButton />
-      {loading}
-      {error && <p>{error}</p>}
-      {!loading && !error && phone && <PhoneDetail phone={phone} />}
+      {isLoading}
+      {isError && <p>❌ No se pudo cargar el producto.</p>}
+      {phone && <PhoneDetail phone={phone} />}
     </motion.div>
   );
 };
