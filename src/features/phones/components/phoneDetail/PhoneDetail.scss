@@ -1,0 +1,217 @@
+.phone-detail__content {
+  height: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+// 📸 Imagen del producto
+.phone-detail__image {
+
+  width: 500px;
+  height: 100%; // ✅ Abarca toda la altura del contenedor
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+
+  img {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: start;
+    display: block;
+  }
+
+  .image--xiaomi {
+    height: 65%;
+    width: auto;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    padding: 90px; // ✅ Ajuste visual solo para Xiaomi
+  }
+}
+
+// 🧠 Contenedor de nombre, marca y precio
+.phone-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  .phone-detail__title {
+    font-size: 18px;
+    font-weight: lighter;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .phone-detail__brand {
+    font-size: 14px;
+    color: #888;
+    margin: 0;
+    margin-top: 4px;
+  }
+
+  .phone-detail__price {
+    font-size: 14px;
+    font-weight: 500;
+    color: #494646;
+    margin: 0;
+    margin-top: 12px;
+  }
+}
+
+
+
+// 🧾 Información del producto
+
+
+
+
+.phone-detail__info {
+  width: 280px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.phone-detail__options {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  fieldset {
+    border:none;
+    padding: 0;
+  }
+
+  legend {
+    font-size: 11px;
+    font-weight: 500;
+    color: #494646;
+    margin-bottom: 14px;
+  }
+
+  .storage-options {
+    display: flex;
+  }
+
+  .storage-option {
+    padding: 12px 16px;
+    border: 1px solid #bbb;
+    background-color: #fff;
+    color: #8d8b8b;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      border-color: #2f2f2f;
+    }
+
+    &--selected {
+      background-color: #fff;
+      border-color: #2f2f2f;
+      color: #2f2f2f;
+    }
+  }
+
+  .color-options {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .color-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    
+
+    .color-squad {
+      width: 15px;
+      height: 15px;
+      transition: border 0.2s ease;      
+    }
+  }
+
+  .squad-container{
+    padding: 1px;
+    border: 1px solid #bbb;
+    
+    &:hover {
+      border-color: #000;
+    }
+
+    &--selected  {
+      border: 1px solid black;
+    }
+  }
+}
+
+.selected-color-name {
+  display: block;
+  height: 18px; // fuerza altura estable
+  margin-top: 0.8rem;
+  font-size: 10px;
+  color: #222;
+  text-align: start;
+  transition: all 0.2s ease;
+}
+
+.invisible-placeholder {
+  visibility: hidden; // mantiene el espacio pero no se ve
+}
+
+
+.phone-specs {
+  margin:  70px auto;
+  margin-top: 3rem;
+  width: 900px;
+
+  &__title {
+    font-size: 16px;
+    font-weight: lighter;
+    margin-bottom: 2rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    border-top: 1px solid #ccc;
+    border-bottom: 0.5px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    justify-content: start ;
+    padding: 10px 0px ;
+  }
+
+  &__term {
+    color: #444;
+    font-size: 0.7rem;
+    width: 30%;
+  }
+
+  &__desc {
+    margin: 3px;
+    color: #555;
+    font-size: 0.7rem;
+    width: 70%;
+  }
+}
+
+.title-container {
+  width: 900px;
+  margin: 0 auto;
+}

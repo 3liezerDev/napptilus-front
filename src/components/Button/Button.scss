@@ -1,0 +1,30 @@
+.custom-button {
+    background-color: #111; // Color negro
+    color: #fff; // Color del texto en blanco
+    padding: 12px 24px; // Espaciado interno
+    border: none; // Sin bordes
+    cursor: pointer; // Cambio de cursor al pasar el mouse
+    text-transform: uppercase; // Texto en mayúsculas
+    font-size: 14px; // Tamaño del texto
+    font-weight: 400; // Peso del texto
+    letter-spacing: 1px; // Espaciado entre letras
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; // Ocupa todo el ancho disponible
+    height: 40px; // Altura del botón
+    text-align: center;
+    
+    &:hover {
+      background-color: #222; // Cambio de color al pasar el mouse
+    }
+  
+    &:active {
+      background-color: #000; // Cambio de color al hacer clic
+    }
+    &:disabled {
+      background-color: #f4f3f3;
+      color: #c3c3c3;
+      cursor:default;
+    }
+  }

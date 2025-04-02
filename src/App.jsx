@@ -1,11 +1,8 @@
+import AppRouter from "./router/AppRouter";
+import "./styles/global.scss";
 
-function App() {
+const App = () => {
+  return <AppRouter />;
+};
 
-  return (
-    <main>
-      <h1>Testing React project </h1>
-    </main>
-  )
-}
-
-export default App
+export default App;
