@@ -18,6 +18,7 @@ export const usePhones = (searchQuery) => {
     refetchOnWindowFocus: true,
     refetchOnMount: true,
     retry: 2,
+    keepPreviousData: true
   });
 
   const filteredPhones = useMemo(() => {

@@ -6,7 +6,7 @@ import {
   overlayVariants,
   fadeVariant,
   instantFade,
-} from "../phoneCard/phoneCard.animations";
+} from "@/animations/phoneCard.animations";
 
 export const PhoneCard = ({ phone }) => {
   const id = phone[PHONE_FIELDS.ID];
