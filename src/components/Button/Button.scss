@@ -22,4 +22,9 @@
     &:active {
       background-color: #000; // Cambio de color al hacer clic
     }
+    &:disabled {
+      background-color: #f4f3f3;
+      color: #c3c3c3;
+      cursor:default;
+    }
   }
