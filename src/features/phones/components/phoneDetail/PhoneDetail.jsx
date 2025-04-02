@@ -1,59 +1,73 @@
+import { useState } from "react";
+import PhoneInfo from "./PhoneInfo";
+import PhoneOptions from "./PhoneOptions";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeInLeft } from "@/animations/fadeVariants";
+import { Button } from "@/components";
 import "./PhoneDetail.scss";
 
 const PhoneDetail = ({ phone }) => {
-  if (!phone) return null;
+  const [currentPrice, setCurrentPrice] = useState(phone.basePrice);
+  const [currentImage, setCurrentImage] = useState(phone.colorOptions[0].imageUrl);
+  const [selectedStorage, setSelectedStorage] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+
+  const isXiaomi = phone.brand.toUpperCase() === "XIAOMI";
+
+  const handleAddToCart = () => {
+    if (!selectedStorage || !selectedColor) return;
+
+    const productToAdd = {
+      id: phone.id,
+      name: phone.name,
+      brand: phone.brand,
+      price: currentPrice,
+      storage: selectedStorage,
+      color: selectedColor,
+      imageUrl: currentImage,
+    };
+
+    console.log("✅ Añadiendo al carrito:", productToAdd);
+    // Aquí podrías hacer dispatch, llamada a API, etc.
+  };
 
   return (
-    <main className="phone-detail">
-      <section className="phone-detail__content">
-        {/* Imagen del producto */}
-        <figure className="phone-detail__image">
-          <img
-            src={phone.colorOptions[0].imageUrl}
-            alt={phone.name}
+    <section className="phone-detail__content" aria-label={`Detalles del producto ${phone.name}`}>
+      <figure className="phone-detail__image">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentImage}
+            src={currentImage}
+            alt={`Imagen de ${phone.name}`}
+            className={isXiaomi ? "image--xiaomi" : ""}
+            {...fadeInLeft}
           />
-        </figure>
+        </AnimatePresence>
+      </figure>
 
-        {/* Información del producto */}
-        <section className="phone-detail__info">
-          <h3 className="phone-detail__title">{phone.name}</h3>
-          <p className="phone-detail__price">{phone.basePrice} EUR</p>
+      <section className="phone-detail__info">
+        <PhoneInfo name={phone.name} brand={phone.brand} price={currentPrice} />
 
-          {/* Opciones de almacenamiento */}
-          <fieldset className="phone-detail__storage">
-            <legend>STORAGE: How much space do you need?</legend>
-            <div className="storage-options">
-              {phone.storageOptions.map((option, index) => (
-                <button key={index} className="storage-option">
-                  {option.capacity}
-                </button>
-              ))}
-            </div>
-          </fieldset>
+        <PhoneOptions
+          storageOptions={phone.storageOptions}
+          colorOptions={phone.colorOptions}
+          onPriceChange={setCurrentPrice}
+          onColorChange={(colorName) => {
+            setSelectedColor(colorName);
+            const selected = phone.colorOptions.find(c => c.name === colorName);
+            if (selected) setCurrentImage(selected.imageUrl);
+          }}
+          onStorageChange={setSelectedStorage}
+        />
 
-          {/* Opciones de color */}
-          <fieldset className="phone-detail__colors">
-            <legend>COLOR: Pick your favourite.</legend>
-            <div className="color-options">
-              {phone.colorOptions.map((color, index) => (
-                <div key={index} className="color-option">
-                  <div
-                    className="color-circle"
-                    style={{ backgroundColor: color.hexCode }}
-                  ></div>
-                  <span>{color.name}</span>
-                </div>
-              ))}
-            </div>
-          </fieldset>
-
-          {/* Botón de añadir al carrito */}
-          <button className="add-to-cart">AÑADIR</button>
-        </section>
+        <Button
+          label="añadir"
+          parentMethod={handleAddToCart}
+          disabled={!selectedStorage || !selectedColor}
+        />
       </section>
-    </main>
+    </section>
   );
 };
 
 export default PhoneDetail;
-
