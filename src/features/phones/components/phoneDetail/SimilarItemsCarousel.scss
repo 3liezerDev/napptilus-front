@@ -1,0 +1,30 @@
+.similar-items-carousel {
+    margin-top: 4rem;
+  
+    h3 {
+        font-size: 16px;
+        font-weight: lighter;
+        margin-bottom: 2rem;
+    }
+  
+    .carousel-track {
+      display: flex;
+      overflow-x: auto;
+      padding: 1rem;
+      scroll-snap-type: x mandatory;
+  
+      &::-webkit-scrollbar {
+        display: none;
+      }
+  
+      > * {
+        scroll-snap-align: start;
+        flex: 0 0 auto;
+      }
+    }
+  }
+  
+  .title-container {
+    width: 900px;
+    margin: 0 auto;
+  }
