@@ -29,6 +29,7 @@ export const PhoneCard = ({ phone }) => {
           <img
             src={phone[PHONE_FIELDS.IMAGE_URL]}
             alt={phone[PHONE_FIELDS.NAME]}
+            loading="lazy"
             className={`${
               phone[PHONE_FIELDS.BRAND].toUpperCase() === "XIAOMI"
                 ? "xiaomi-image"
