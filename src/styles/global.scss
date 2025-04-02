@@ -1,5 +1,5 @@
-@use "variables" as vars; // Importa _variables.scss con alias "vars"
-@use "mixins"; // Importa _mixins.scss sin alias (por defecto "mixins")
+@use "variables" as vars;
+@use "mixins";
 
 body {
   font-family: vars.$font-stack;
@@ -7,4 +7,40 @@ body {
   padding: 0;
 }
 
+.cart-page {
+  padding: 18px 100px;
+  display: flex;
+  flex-direction: column;
+  min-height: 85vh;
+}
 
+.cart-result {
+  font-size: 14px;
+}
+
+.cart-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-grow: 1; // ✅ Esto empuja .cart-summary hacia abajo
+}
+
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.cart-total {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-total span {
+  font-size: small;
+}
