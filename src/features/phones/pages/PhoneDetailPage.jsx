@@ -3,6 +3,8 @@ import { usePhoneById } from "../../phones/hooks/usePhonById";
 import { motion } from "framer-motion";
 import PhoneDetail from "../components/phoneDetail/PhoneDetail";
 import { BackButton } from "../../../components/BackButton/BackButton";
+import PhoneSpecifications from "../components/phoneDetail/PhoneSpecifications";
+import SimilarItemsCarousel from "../components/phoneDetail/SimilarItemsCarousel";
 
 const pageTransition = {
   type: "spring",
@@ -26,7 +28,13 @@ const PhoneDetailPage = () => {
       <BackButton />
       {isLoading}
       {isError && <p>❌ No se pudo cargar el producto.</p>}
-      {phone && <PhoneDetail phone={phone} />}
+      {phone && (
+        <>
+          <PhoneDetail phone={phone} />
+          <PhoneSpecifications specifications={phone.specs} />
+          <SimilarItemsCarousel similarProducts={phone.similarProducts} />      
+        </>
+      )}
     </motion.div>
   );
 };
