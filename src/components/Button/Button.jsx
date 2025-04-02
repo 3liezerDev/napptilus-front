@@ -1,8 +1,12 @@
 import "./Button.scss";
 
-export const Button = ({ label, parentMethod, disabled }) => {
+export const Button = ({ label, parentMethod, disabled, variant = "" }) => {
   return (
-    <button className="custom-button" onClick={parentMethod} disabled={disabled}>
+    <button
+      className={`custom-button ${variant}`}
+      onClick={parentMethod}
+      disabled={disabled}
+    >
       {label}
     </button>
   );
