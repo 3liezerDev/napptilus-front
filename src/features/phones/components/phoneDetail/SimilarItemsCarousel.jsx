@@ -12,8 +12,7 @@ const SimilarItemsCarousel = ({ similarProducts }) => {
       </div>
       <div className="carousel-track">
         {similarProducts.map((phone) => (
-          <PhoneCard key={phone.id} phone={phone} isCarouselItem />
-        ))}
+            <PhoneCard key={`carousel-${phone.id}`} phone={phone} isCarouselItem />        ))}
       </div>
     </section>
   );

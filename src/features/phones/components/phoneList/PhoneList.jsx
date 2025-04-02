@@ -13,8 +13,7 @@ const PhoneList = ({ phones, loading }) => {
         <p>Loading phones...</p>
       ) : memorizedPhones.length > 0 ? (
         memorizedPhones.map((phone) => (
-          <PhoneCard key={phone[PHONE_FIELDS.ID]} phone={phone} />
-        ))
+          <PhoneCard key={`list-${phone[PHONE_FIELDS.ID]}`} phone={phone} />        ))
       ) : (
         <p>No phones found.</p>
       )}

@@ -4,6 +4,8 @@ import PhoneOptions from "./PhoneOptions";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInLeft } from "@/animations/fadeVariants";
 import { Button } from "@/components";
+import { secureUrl } from "@/utils/secureUrl";
+import { useCart } from "@/contexts/CartContext";
 import "./PhoneDetail.scss";
 
 const PhoneDetail = ({ phone }) => {
@@ -13,6 +15,8 @@ const PhoneDetail = ({ phone }) => {
   const [selectedColor, setSelectedColor] = useState(null);
 
   const isXiaomi = phone.brand.toUpperCase() === "XIAOMI";
+
+  const { addToCart } = useCart(); 
 
   const handleAddToCart = () => {
     if (!selectedStorage || !selectedColor) return;
@@ -27,6 +31,7 @@ const PhoneDetail = ({ phone }) => {
       imageUrl: currentImage,
     };
 
+    addToCart(productToAdd);
     console.log("✅ Añadiendo al carrito:", productToAdd);
     // Aquí podrías hacer dispatch, llamada a API, etc.
   };
@@ -37,7 +42,7 @@ const PhoneDetail = ({ phone }) => {
         <AnimatePresence mode="wait">
           <motion.img
             key={currentImage}
-            src={currentImage}
+            src={secureUrl(currentImage)}
             alt={`Imagen de ${phone.name}`}
             className={isXiaomi ? "image--xiaomi" : ""}
             {...fadeInLeft}

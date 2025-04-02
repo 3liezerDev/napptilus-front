@@ -2,6 +2,7 @@ import "./PhoneCard.scss";
 import { PHONE_FIELDS } from "../../constants/apiFields";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { secureUrl } from "@/utils/secureUrl";
 import {
   overlayVariants,
   fadeVariant,
@@ -27,7 +28,7 @@ export const PhoneCard = ({ phone, isCarouselItem = false }) => {
 
         <header className="phone-card__header">
           <img
-            src={phone[PHONE_FIELDS.IMAGE_URL]}
+            src={secureUrl(phone[PHONE_FIELDS.IMAGE_URL])}
             alt={phone[PHONE_FIELDS.NAME]}
             loading="lazy"
             className={`${
