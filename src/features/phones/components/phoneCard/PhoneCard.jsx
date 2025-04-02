@@ -8,13 +8,13 @@ import {
   instantFade,
 } from "@/animations/phoneCard.animations";
 
-export const PhoneCard = ({ phone }) => {
+export const PhoneCard = ({ phone, isCarouselItem = false }) => {
   const id = phone[PHONE_FIELDS.ID];
 
   return (
     <Link to={`/product/${id}`} className="phone-card__link">
       <motion.article
-        className="phone-card"
+        className={`phone-card ${isCarouselItem ? "phone-card--compact" : ""}`}
         initial="rest"
         whileHover="hover"
         animate="rest"
