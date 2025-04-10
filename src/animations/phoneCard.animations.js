@@ -5,7 +5,7 @@ export const overlayVariants = {
   
   export const fadeVariant = {
     rest: {
-      color: '#000',
+      color: '#79736D',
       y: 0,
       opacity: 1,
       transition: { duration: 0.1 },
