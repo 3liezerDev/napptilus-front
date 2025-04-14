@@ -4,26 +4,26 @@ import { Button } from './Button';
 import { vi } from 'vitest'; // usa esto si usas Vitest
 
 describe('Button', () => {
-  test('muestra el label correctamente', () => {
+  test('renders the label correctly', () => {
     render(<Button label="Aceptar" />);
     expect(screen.getByText('Aceptar')).toBeInTheDocument();
   });
 
-  test('llama a parentMethod cuando se hace click', () => {
+  test('calls parentMethod when clicked', () => {
     const mockFn = vi.fn();
     render(<Button label="Click aquí" parentMethod={mockFn} />);
     fireEvent.click(screen.getByText('Click aquí'));
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
 
-  test('no llama a parentMethod si está deshabilitado', () => {
+  test('does not call parentMethod when disabled', () => {
     const mockFn = vi.fn();
     render(<Button label="No Click" parentMethod={mockFn} disabled />);
     fireEvent.click(screen.getByText('No Click'));
     expect(mockFn).not.toHaveBeenCalled();
   });
 
-  test('agrega clase de variante si se proporciona', () => {
+  test('adds the variant class when provided', () => {
     render(<Button label="Botón" variant="primary" />);
     const button = screen.getByRole('button');
     expect(button).toHaveClass('custom-button');
