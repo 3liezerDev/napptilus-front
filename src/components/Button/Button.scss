@@ -72,5 +72,27 @@
       color: #c3c3c3;
       border-color: #c3c3c3;
     }
+
+  }
+
+  .custom-button.back-button {
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+    width:auto;
+    padding:0;
+  
+    &:hover {
+      opacity: 0.6;
+    }
   }
   
