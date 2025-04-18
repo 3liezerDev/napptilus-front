@@ -7,8 +7,8 @@ describe('PhoneCard', () => {
     id: '12345',
     name: 'iPhone 13',
     brand: 'Apple',
-    image_url: 'http://example.com/iphone13.png',
-    base_price: '999',
+    imageUrl: 'http://example.com/iphone13.png',
+    basePrice: '999',
   };
 
   test('renders phone brand, name, and price correctly', () => {
