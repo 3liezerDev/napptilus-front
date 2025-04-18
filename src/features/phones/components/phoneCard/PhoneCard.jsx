@@ -9,22 +9,7 @@ import {
   instantFade,
 } from "@/animations/phoneCard.animations";
 
-const getImageClass = (brand) => 
-  brand.toUpperCase() === "XIAOMI" ? "xiaomi-image" : "phone-card__image";
-
-
-
-
 export const PhoneCard = ({ phone, isCarouselItem = false }) => {
-
-  if (!phone || !phone[PHONE_FIELDS.IMAGE_URL]) {
-    return (
-      <div className="phone-card__empty">
-        phone not available
-      </div>
-    );
-  }
-
   const id = phone[PHONE_FIELDS.ID];
 
   return (
@@ -46,7 +31,11 @@ export const PhoneCard = ({ phone, isCarouselItem = false }) => {
             src={secureUrl(phone[PHONE_FIELDS.IMAGE_URL])}
             alt={phone[PHONE_FIELDS.NAME]}
             loading="lazy"
-            className={getImageClass(phone[PHONE_FIELDS.BRAND])}
+            className={`${
+              phone[PHONE_FIELDS.BRAND].toUpperCase() === "XIAOMI"
+                ? "xiaomi-image"
+                : "phone-card__image"
+            }`}
           />
         </header>
 
