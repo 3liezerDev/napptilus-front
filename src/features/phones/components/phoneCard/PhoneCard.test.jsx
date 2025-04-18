@@ -45,6 +45,17 @@ describe('PhoneCard', () => {
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute('src', 'https://example.com/iphone13.png');
   });
+  
+  test('renders fallback message if phone data is missing', () => {
+    render(
+      <MemoryRouter>
+        <PhoneCard phone={null} />
+      </MemoryRouter>
+    );
+  
+    expect(screen.getByText(/phone not available/i)).toBeInTheDocument();
+  });
+  
 
   test('navigates to the correct product detail page when clicked', () => {
     render(

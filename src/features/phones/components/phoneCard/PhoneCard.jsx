@@ -12,7 +12,19 @@ import {
 const getImageClass = (brand) => 
   brand.toUpperCase() === "XIAOMI" ? "xiaomi-image" : "phone-card__image";
 
+
+
+
 export const PhoneCard = ({ phone, isCarouselItem = false }) => {
+
+  if (!phone || !phone[PHONE_FIELDS.IMAGE_URL]) {
+    return (
+      <div className="phone-card__empty">
+        phone not available
+      </div>
+    );
+  }
+
   const id = phone[PHONE_FIELDS.ID];
 
   return (
