@@ -23,17 +23,6 @@ describe('PhoneCard', () => {
     expect(screen.getByText('999 EUR')).toBeInTheDocument();
   });
 
-  test('renders phone image with correct alt text', () => {
-    render(
-      <MemoryRouter>
-        <PhoneCard phone={mockPhone} />
-      </MemoryRouter>
-    );
-
-    const image = screen.getByAltText(/iphone 13/i);
-    expect(image).toBeInTheDocument();
-  });
-
   test('renders phone image with correct alt text and src', () => {
     render(
       <MemoryRouter>
